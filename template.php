@@ -406,7 +406,6 @@ function tao_username($object) {
   if (!empty($object->name)) {
     // Shorten the name when it is too long or it will break many tables.
     $name = drupal_strlen($object->name) > 20 ? drupal_substr($object->name, 0, 15) .'...' : $object->name;
-    $name = check_plain($name);
 
     // Default case -- we have a real Drupal user here.
     if ($object->uid && user_access('access user profiles')) {
@@ -418,6 +417,7 @@ function tao_username($object) {
     }
     // Produce an unlinked username.
     else {
+      $name = check_plain($name);
       return "<span class='username'>{$name}</span>";
     }
   }
