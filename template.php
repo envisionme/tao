@@ -435,10 +435,18 @@ function tao_pager($tags = array(), $limit = 10, $element = 0, $parameters = arr
   $pager_list = theme('pager_list', $tags, $limit, $element, $parameters, $quantity);
 
   $links = array();
-  $links['pager-first'] = theme('pager_first', ($tags[0] ? $tags[0] : t('First')), $limit, $element, $parameters);
-  $links['pager-previous'] = theme('pager_previous', ($tags[1] ? $tags[1] : t('Prev')), $limit, $element, 1, $parameters);
-  $links['pager-next'] = theme('pager_next', ($tags[3] ? $tags[3] : t('Next')), $limit, $element, 1, $parameters);
-  $links['pager-last'] = theme('pager_last', ($tags[4] ? $tags[4] : t('Last')), $limit, $element, $parameters);
+  if (isset($tags[0]))
+    $links['pager-first'] = theme('pager_first', ($tags[0] ? $tags[0] : t('First')), $limit, $element, $parameters);
+
+  if (isset($tags[1]))
+    $links['pager-previous'] = theme('pager_previous', ($tags[1] ? $tags[1] : t('Prev')), $limit, $element, 1, $parameters);
+
+  if (isset($tags[3]))
+    $links['pager-next'] = theme('pager_next', ($tags[3] ? $tags[3] : t('Next')), $limit, $element, 1, $parameters);
+
+  if (isset($tags[4]))
+    $links['pager-last'] = theme('pager_last', ($tags[4] ? $tags[4] : t('Last')), $limit, $element, $parameters);
+
   $links = array_filter($links);
   $pager_links = theme('links', $links, array('class' => 'links pager pager-links'));
 
